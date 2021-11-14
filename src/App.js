@@ -1,6 +1,6 @@
 import {Container} from 'react-bootstrap';
 import User from "./Components/User";
-import Events from "./Components/Events.js"
+import Events from "./Components/Events/Events.js"
 import {connect} from "react-redux";
 import {initiateCreateUser, initiateLogin, logout} from "./modules/userModule";
 import {

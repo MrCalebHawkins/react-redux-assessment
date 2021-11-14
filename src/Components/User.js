@@ -27,7 +27,7 @@ const User = ({handleLoginRequest, handleCreateUser}) => {
                 <Col xs={5}>
                     <Card>
                         <Card.Body>
-                            <Card.Title>Please {register ? 'Register' : 'User'}</Card.Title>
+                            <Card.Title>Please {register ? 'Register' : 'Login'}</Card.Title>
                             <Form onSubmit={register ? handleRegister : handleSubmit}>
                                 <Form.Group as={Row} className="mt-3">
                                     <Form.Label column sm={4}>Username</Form.Label>
