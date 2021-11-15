@@ -58,6 +58,12 @@ export default function reducer(state = initialState, action) {
                 updateEventPending: false,
                 updateEventFailure: true
             }
+        case 'UPDATE_EVENTS_SUCCESS':
+            return{
+                ...state,
+                getReminderByIdPending: false,
+                getRemindersByIdFailure: false
+            }
         case "DELETE_EVENT_REQUEST":
             return {
                 ...state,
@@ -145,27 +151,6 @@ export function initiateUpdateByID(event) {
         })
     }
 }
-
-// export function initiateUpdateEvents() {
-//     return function (dispatch, getState) {
-//         dispatch({type: 'UPDATE_EVENTS_REQUEST'})
-//         updateEvent(getState().events).then(response => {
-//             if (!response.ok) {
-//                 dispatch({type: 'UPDATE_EVENTS_FAILURE'})
-//                 return
-//             }
-//
-//             response.json().then(json => {
-//                 if (!json.event) {
-//                     dispatch({type: 'UPDATE_EVENTS_FAILURE'})
-//                     return
-//                 }
-//                 dispatch({type: 'UPDATE_EVENTS_SUCCESS', events: json.event})
-//                 dispatch(initiateGetEvents())
-//             })
-//         })
-//     }
-// }
 
 export function initiateDeleteById(event) {
     console.log(event)

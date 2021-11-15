@@ -7,6 +7,7 @@ import logger from 'redux-logger';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import user from "./modules/userModule";
 import events from "./modules/eventsModule";
+import reminders from "./modules/reminderModule";
 import './index.css';
 
 const asyncMiddleware = storeAPI => next => action => {
@@ -17,7 +18,7 @@ const asyncMiddleware = storeAPI => next => action => {
     return next(action)
 }
 
-const rootReducer = combineReducers({user, events})
+const rootReducer = combineReducers({user, events, reminders})
 
 const middlewareEnhancer = applyMiddleware(asyncMiddleware, logger)
 const store = createStore(rootReducer, middlewareEnhancer)

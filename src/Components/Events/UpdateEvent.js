@@ -7,20 +7,17 @@ function UpdateEvent({event, handleUpdateEventById}) {
     const [title, setTitle] = useState(event.title)
     const [description, setDescription] = useState(event.description)
     const [location, setLocation] = useState(event.location)
-    const [attendee, setAttendee] = useState(event.attendee_list)
+    const [attendeeList, setAttendee] = useState(event.attendee_list)
     const [start_timestamp, setStartTime] = useState(event.start_timestamp)
     const [meeting_link, setMeetingLink] = useState(event.meeting_link)
     const [end_timestamp, setEndTime] = useState(event.end_timestamp)
     const [edit, setEdit] = useState()
 
     const id = event.id
-    let attendee_list = event.attendee_list
 
     const handleClose = () => {
         setEdit(false)
         setShow(false);}
-
-
 
     function handleShow() {
         setShow(true)
@@ -29,7 +26,6 @@ function UpdateEvent({event, handleUpdateEventById}) {
     function handleEdit() {
         setEdit(true)
     }
-
 
     function onTitleUpdate(e) {
         setTitle(e.target.value)
@@ -62,9 +58,8 @@ function UpdateEvent({event, handleUpdateEventById}) {
     function upDateButton() {
         handleClose()
         setEdit(false)
-        if (attendee === String) {
-            event.attendee_list = attendee.split(",")
-        }
+        const attendee_list = attendeeList.split(",")
+
 
         handleUpdateEventById({
             id,

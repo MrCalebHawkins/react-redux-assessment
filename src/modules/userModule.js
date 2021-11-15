@@ -114,6 +114,7 @@ export function logout() {
 //Side Effects
 
 export function initiateLogin(credentials) {
+    console.log(credentials)
     return function login(dispatch) {
         dispatch(loginRequest())
         requestLogin(credentials).then(response => {
@@ -163,4 +164,10 @@ export function initiateCreateUser(credentials) {
         })
     }
 
+}
+
+export function initiateLogout() {
+    return function logOut(dispatch) {
+        dispatch (logout())
+    }
 }

@@ -13,7 +13,7 @@ const User = ({handleLoginRequest, handleCreateUser}) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        handleLoginRequest(username, password)
+        handleLoginRequest({username, password})
     }
 
     function handleRegister(e) {
