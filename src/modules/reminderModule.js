@@ -10,7 +10,7 @@ import {getRemindersById, updateRemindersById} from "../services/reminderService
 
 //Reducers
 
-const initialState = {
+export const initialState = {
     getReminderByIdPending: false,
     getRemindersByIdFailure: false,
     reminders: [],
@@ -82,10 +82,11 @@ export function initiateGetReminderByID(reminder) {
     }
 }
 
-export function initiateUpdateReminderByID(reminder) {
+export function initiateUpdateReminderByID(reminders) {
+    console.log(reminders)
     return function (dispatch, getState) {
         dispatch ({type: 'UPDATE_REMINDERBYID_REQUEST'})
-        updateRemindersById(reminder, getState().user.token).then(response => {
+        updateRemindersById(reminders, getState().user.token).then(response => {
             if (!response.ok) {
                 dispatch({type: 'UPDATE_REMINDERBYID_FAILURE'})
                 return
@@ -96,7 +97,7 @@ export function initiateUpdateReminderByID(reminder) {
                     return
                 }
                 dispatch({type: 'UPDATE_REMINDERBYID_SUCCESS'})
-                dispatch(initiateGetReminderByID(reminder))
+                dispatch(initiateGetReminderByID(reminders))
             })
         })
     }

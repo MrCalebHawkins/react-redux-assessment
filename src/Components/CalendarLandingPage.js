@@ -3,10 +3,10 @@ import Events from "./Events/Events";
 import {initiateCreateEvents, initiateDeleteById, initiateGetEvents, initiateUpdateByID} from "../modules/eventsModule";
 import {initiateLogout} from "../modules/userModule";
 import Reminders from "./Reminders/Reminders";
-import {initiateGetReminderByID} from "../modules/reminderModule";
+import {initiateGetReminderByID, initiateUpdateReminderByID} from "../modules/reminderModule";
 
 
-function CalendarLandingPage ({dispatch, events, reminders}) {
+function CalendarLandingPage ({dispatch, events, reminders, updateRemindersByIdFailure}) {
 
     return (
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -38,9 +38,9 @@ function CalendarLandingPage ({dispatch, events, reminders}) {
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                         <Reminders
-                           reminders={reminders}
+                           reminders={reminders} updateRemindersByIdFailure={updateRemindersByIdFailure}
                             handleGetRemindersById={reminder => dispatch(initiateGetReminderByID(reminder))}
-                           handleUpdateRemindersById={reminder =>dispatch(initiateUpdateByID(reminder))}
+                           handleUpdateRemindersById={reminders => dispatch(initiateUpdateReminderByID(reminders))}
 
                         />
                     </Tab.Pane>

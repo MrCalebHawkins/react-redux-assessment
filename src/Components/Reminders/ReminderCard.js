@@ -15,47 +15,53 @@ const ReminderCard = ({reminders, handleGetRemindersById, handleUpdateRemindersB
     const handleClose = () => {
         setShow(false)
     }
+
     function handleShow() {
         setShow(true)
     }
 
-    function onTimeUpdate (e) {
+    function onTimeUpdate(e) {
         setTimestamp(e.target.value)
     }
 
-    function onTitleUpdate (e) {
+    function onTitleUpdate(e) {
         setTitle(e.target.value)
     }
-    function onEventIdUpdate (e) {
+
+    function onEventIdUpdate(e) {
         setEventID(e.target.value)
     }
-    function onUserIdUpdate (e) {
+
+    function onUserIdUpdate(e) {
         setUserID(e.target.value)
     }
 
+    function handleEdit() {
+        handleClose()
 
-
+        handleUpdateRemindersByID({event_id, timestamp, title, user_id})
+    }
 
 
     return (
         <>
-        <Col>
-            <Card>
-                <Card.Body>
-                    <Card.Subtitle>
-                        My Reminder
-                    </Card.Subtitle>
-                    <Card.Text>
-                        Event Id: {reminders.event_id}<br/>
-                        Time: {reminders.timestamp}<br/>
-                        Reminder: {reminders.title}
-                    </Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                    <Button onClick={handleShow}>Edit</Button>
-                </Card.Footer>
-            </Card>
-        </Col>
+            <Col>
+                <Card>
+                    <Card.Body>
+                        <Card.Subtitle>
+                            My Reminder
+                        </Card.Subtitle>
+                        <Card.Text>
+                            Event Id: {reminders.event_id}<br/>
+                            Time: {reminders.timestamp}<br/>
+                            Reminder: {reminders.title}
+                        </Card.Text>
+                    </Card.Body>
+                    <Card.Footer>
+                        <Button onClick={handleShow}>Edit</Button>
+                    </Card.Footer>
+                </Card>
+            </Col>
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Update: {reminders.title} </Modal.Title>
@@ -71,11 +77,11 @@ const ReminderCard = ({reminders, handleGetRemindersById, handleUpdateRemindersB
                         <Col><Form.Control type='text' defaultValue={reminders.timestamp}
                                            onChange={onTimeUpdate}/></Col>
                     </Form.Group>
-                        <Form.Group as={Row}>
+                    <Form.Group as={Row}>
                         <Form.Label column sm={2}>Event Id</Form.Label>
                         <Col><Form.Control type='text' defaultValue={reminders.event_id}
-                        onChange={onEventIdUpdate}/></Col>
-                        </Form.Group>
+                                           onChange={onEventIdUpdate}/></Col>
+                    </Form.Group>
                     <Form.Group as={Row}>
                         <Form.Label column sm={2}>User Id</Form.Label>
                         <Col><Form.Control type='text' defaultValue={reminders.user_id}
@@ -83,9 +89,12 @@ const ReminderCard = ({reminders, handleGetRemindersById, handleUpdateRemindersB
                     </Form.Group>
 
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={handleEdit}>Submit Change</Button>
+                </Modal.Footer>
             </Modal>
 
-            </>
+        </>
     )
 }
 

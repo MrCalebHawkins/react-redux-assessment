@@ -6,14 +6,13 @@ import CalendarLandingPage from "./Components/CalendarLandingPage";
 
 
 //This is the top level of the app
-function App({dispatch, events, reminders, token}) {
+function App({dispatch, events, reminders, token, updateRemindersByIdFailure}) {
 
-    console.log(reminders)
     return (
         <Container>
             {
                 token ?
-                    <CalendarLandingPage events={events} reminders={reminders} dispatch={dispatch}/> :
+                    <CalendarLandingPage events={events} reminders={reminders} dispatch={dispatch} updateRemindersByIdFailure={updateRemindersByIdFailure}/> :
                     <User
                         handleLoginRequest={credentials => dispatch(initiateLogin(credentials))}
                         handleCreateUser={credentials => dispatch(initiateCreateUser(credentials))}

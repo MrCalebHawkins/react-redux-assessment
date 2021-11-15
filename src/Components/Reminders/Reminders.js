@@ -1,13 +1,18 @@
-import {Form} from "react-bootstrap";
+import {Form, Toast, ToastContainer} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ReminderCard from "./ReminderCard";
+import {useSelector} from "react-redux";
 
 
-function Reminders({reminders, handleGetRemindersById, handleUpdateRemindersById}) {
+function Reminders({reminders, handleGetRemindersById, handleUpdateRemindersById, updateRemindersByIdFailure}) {
 
     const [user_id, setUserId] = useState('')
     const [id, setId] = useState('')
+    const[showStupidUpdateError, setStupidUpdateError] = useState(false)
+    const reminderState = useSelector((state) => {
+        return state
+    });
 
     function onReminderChange(e) {
         setUserId(e.target.value)
@@ -22,6 +27,11 @@ function Reminders({reminders, handleGetRemindersById, handleUpdateRemindersById
     function onIdChange(e) {
         setId(e.target.value)
     }
+    useEffect(() => {
+        if (reminderState.reminders.updateRemindersByIdFailure) {
+            setStupidUpdateError(reminderState.reminders.updateRemindersByIdFailure)
+        }
+    }, [reminderState.reminders.updateRemindersByIdFailure])
 
     return (
         <>
@@ -47,6 +57,12 @@ function Reminders({reminders, handleGetRemindersById, handleUpdateRemindersById
             </Button>
         </Form>
         <ReminderCard reminders={reminders} handleGetRemindersById={handleGetRemindersById} handleUpdateRemindersByID={handleUpdateRemindersById}/>
+            <ToastContainer className="p-3" position='bottom-end'>
+                <Toast bg='danger' onClose={() => setStupidUpdateError(false)} show={showStupidUpdateError}
+                       delay={3000} autohide>
+                    <Toast.Body className={'text-white'}>Error Updating Reminder</Toast.Body>
+                </Toast>
+            </ToastContainer>
     </>)
 }
 export default Reminders
